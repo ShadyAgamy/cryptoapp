@@ -307,11 +307,12 @@ width: 70%;
 }
 .news-card p{
     color: black;
-    margin: 10px 0px !important;
+    margin: 15px 0px !important;
 }
 .provider-container{
     display: flex;
     justify-content: space-between;
+    margin-top: auto;
 }
 .provider-name{
     margin-left: 10px;
