@@ -33,8 +33,6 @@ export const cryptoApi = createApi({
     }),
     GetCryptoPriceHistory: builder.query({
       query: ({coinId, timePeriod}) => {
-        console.log({timePeriod})
-        console.log({coinId})
         return {
           url: `/coin/${coinId}/history`,
           headers: cryptoApiHeaders,

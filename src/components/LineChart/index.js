@@ -3,27 +3,26 @@ import React from "react";
 import { Col, Row, Typography } from "antd";
 
 import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Tooltip,
-    Legend,
-  } from 'chart.js';
-  import { Line } from 'react-chartjs-2';
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Tooltip,
-    Legend
-  );
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Legend
+);
 const { Title } = Typography;
 
 const LineChart = ({ coinHistory, currentPrice, coinName }) => {
-    console.log(coinHistory, currentPrice, coinName)
   const coinPrice = [];
   const coinTimestamp = [];
 
@@ -31,14 +30,15 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
     coinPrice.push(coinHistory?.data?.history[i].price);
   }
 
-  for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
+  const reverseCoinHistory =
+    coinHistory.data.history.length > 0
+      ? [...coinHistory.data.history].reverse()
+      : [];
+  for (let i = 0; i < reverseCoinHistory?.length; i += 1) {
     coinTimestamp.push(
-      new Date(coinHistory?.data?.history[i].timestamp * 1000).toLocaleDateString()
+      new Date(reverseCoinHistory[i].timestamp * 1000).toLocaleDateString()
     );
   }
-
-  console.log({coinPrice})
-  console.log({coinTimestamp})
 
   const data = {
     labels: coinTimestamp,

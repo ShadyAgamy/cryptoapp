@@ -3,7 +3,7 @@ import millify from "millify";
 
 import Cryptocurrencies from "../Cryptocurrencies";
 import News from "../News";
-
+import Loader from "../Loader";
 import { Typography, Row, Col, Statistic } from "antd";
 import { Link } from "react-router-dom";
 
@@ -18,9 +18,7 @@ const Homepage = () => {
   const { data, isFetching } = useGetCryptosQuery(10);
   const globalState = data?.data?.stats;
 
-  console.log(data);
-
-  if (isFetching) return "Loading...";
+  if (isFetching) return <Loader />;
 
   return (
     <>

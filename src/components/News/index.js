@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Select, Typography, Row, Col, Avatar, Card, Input } from "antd";
 import moment from "moment";
-
+import Loader from "../Loader";
 import { useGetNewsQuery } from "../../services/cryptoNewsApi";
 import { useGetCryptosQuery } from "../../services/cryptoApi";
 const { Text, Title } = Typography;
@@ -13,21 +13,15 @@ const demoImage =
 const News = ({ simplified, count }) => {
   const [newsCategory, setNewsCategory] = useState("Cryptocurrency");
   const { data: cryptosList } = useGetCryptosQuery(100);
-  console.log(cryptosList);
   const {
     data: cryptoNews,
-    error,
     isLoading,
   } = useGetNewsQuery({
     newsCategory: newsCategory,
     count: simplified ? 6 : 12,
   });
 
-  function onSearch(val) {
-    console.log("search:", val);
-  }
-
-  if (isLoading) return "Loading...";
+  if (isLoading) return <Loader/>;
 
   return (
     <Row gutter={[24, 24]}>
@@ -39,7 +33,6 @@ const News = ({ simplified, count }) => {
             placeholder="Select a Crypto"
             optionFilterProp="children"
             onChange={(value) => setNewsCategory(value)}
-            onSearch={onSearch}
             filterOption={(input, option) =>
               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }

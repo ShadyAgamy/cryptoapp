@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import { Layout, Typography, Space } from "antd";
 
 import {
@@ -24,7 +24,7 @@ const App = () => {
           <div className="routes">
             <Routes>
               <Route exact path="/" element={<Homepage />} />
-              <Route exact path="/exchanges" element={<Exchanges />} />
+              {/* <Route exact path="/exchanges" element={<Exchanges />} /> */}
               <Route
                 exact
                 path="/cryptocurrencies"
@@ -32,6 +32,9 @@ const App = () => {
               />
               <Route exact path="/crypto/:coinId" element={<CryptoDetails />} />
               <Route exact path="/news" element={<News />} />
+              
+              {/* redirected to root if the route doesn't match */}
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </div>
         </Layout>
